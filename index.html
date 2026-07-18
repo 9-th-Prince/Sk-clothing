@@ -1,0 +1,508 @@
+<!-- ================================================
+     index.html
+     ================================================ -->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SK — Premium Women's Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style and animation/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js">
+    </script>
+</head>
+<body>
+
+    <!-- PAGE LOADER -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-ring"></div>
+        <span class="loader-text">SK</span>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header id="mainNav" class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">SK</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown-trigger">
+                    <a href="#categories">Categories <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#category-tshirts">T-Shirts</a></li>
+                        <li><a href="#category-shirts">Shirts</a></li>
+                        <li><a href="#category-skirts">Skirts</a></li>
+                        <li><a href="#category-coats">Coats</a></li>
+                    </ul>
+                </li>
+                <!-- REMOVED Best Sellers -->
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="icon-btn cart-toggle" id="cartToggle" aria-label="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="icon-btn wishlist-toggle" aria-label="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="wishlist-badge">0</span>
+                </button>
+                <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn-login" id="loginBtn">Login</button>
+                <div class="user-profile" id="userProfile" style="display:none;">
+                    <button class="icon-btn profile-toggle" id="profileToggle">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <span class="user-name" id="userNameDisplay">Guest</span>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="#" data-action="profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" data-action="orders"><i class="fas fa-box"></i> Orders</a>
+                        <a href="#" data-action="wishlist"><i class="fas fa-heart"></i> Wishlist</a>
+                        <hr />
+                        <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                <button class="icon-btn mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <!-- REMOVED Best Sellers in mobile -->
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <hr />
+                <li><a href="#" data-action="profile-mobile">Profile</a></li>
+                <li><a href="#" data-action="orders-mobile">Orders</a></li>
+                <li><a href="#" data-action="wishlist-mobile">Wishlist</a></li>
+                <li><a href="#" data-action="logout-mobile">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Spring / Summer 2026</span>
+            <h1 class="hero-title">Elevate Your<br />Everyday Style</h1>
+            <p class="hero-desc">Discover the new collection of premium women's fashion — where elegance meets modernity.</p>
+            <div class="hero-buttons">
+                <a href="#categories" class="btn-primary">Shop Now <i class="fas fa-arrow-right"></i></a>
+                <a href="#categories" class="btn-outline">Explore Collection</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+            <div class="hero-shape shape-3"></div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section id="categories" class="section categories">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Categories</span>
+                <h2 class="section-title">Shop by Category</h2>
+                <p class="section-desc">Explore our curated collections of premium women's wear.</p>
+            </div>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT SECTIONS ===== -->
+    <section id="category-tshirts" class="section products-section" data-category="tshirts">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Collection</span>
+                <h2 class="section-title">Women's T-Shirts</h2>
+                <p class="section-desc">Essential tees crafted for comfort and style.</p>
+            </div>
+            <div class="products-grid" id="productsTshirts"></div>
+        </div>
+    </section>
+    <section id="category-shirts" class="section products-section" data-category="shirts">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Collection</span>
+                <h2 class="section-title">Women's Shirts</h2>
+                <p class="section-desc">Sophisticated shirts for every occasion.</p>
+            </div>
+            <div class="products-grid" id="productsShirts"></div>
+        </div>
+    </section>
+    <section id="category-skirts" class="section products-section" data-category="skirts">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Collection</span>
+                <h2 class="section-title">Women's Skirts</h2>
+                <p class="section-desc">Elegant skirts that move with you.</p>
+            </div>
+            <div class="products-grid" id="productsSkirts"></div>
+        </div>
+    </section>
+    <section id="category-coats" class="section products-section" data-category="coats">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Collection</span>
+                <h2 class="section-title">Women's Coats</h2>
+                <p class="section-desc">Timeless outerwear for the modern woman.</p>
+            </div>
+            <div class="products-grid" id="productsCoats"></div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <div class="about-image-placeholder"><span>SK</span></div>
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">About SK</span>
+                    <h2 class="section-title">Crafted for the <br />Confident Woman</h2>
+                    <p class="about-text">SK is a premium women's fashion brand born from a passion for timeless elegance and modern sophistication. Every piece is designed with the finest materials and an unwavering commitment to quality.</p>
+                    <p class="about-text">We believe that fashion is a form of self-expression. Our collections are crafted to empower women to feel confident, beautiful, and uniquely themselves.</p>
+                    <a href="#" class="btn-primary">Discover Our Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get in Touch</span>
+                <h2 class="section-title">We'd Love to Hear From You</h2>
+                <p class="section-desc">Have questions? Reach out to our support team.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Visit Us</h4><p>123 Fashion Avenue, New York, NY 10001</p></div></div>
+                    <div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email Us</h4><p>hello@skfashion.com</p></div></div>
+                    <div class="contact-item"><i class="fas fa-phone"></i><div><h4>Call Us</h4><p>+1 (800) 123-4567</p></div></div>
+                    <div class="contact-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Your Email" required />
+                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">SK</a>
+                    <p>Premium women's fashion — where elegance meets modernity. Designed for the confident woman.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#categories">Shop All</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Customer Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for exclusive updates and offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" required />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 SK. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- ===== MODALS ===== -->
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal product-modal glass">
+            <button class="modal-close" id="productModalClose">&times;</button>
+            <div class="product-modal-content">
+                <div class="product-modal-gallery">
+                    <div class="modal-main-image" id="modalMainImage"><img src="https://placecats.com/400/500" alt="Product" /></div>
+                    <div class="modal-thumbnails" id="modalThumbnails"></div>
+                </div>
+                <div class="product-modal-info">
+                    <h3 id="modalProductName">Product Name</h3>
+                    <div class="modal-rating" id="modalRating">★★★★★</div>
+                    <div class="modal-price">
+                        <span class="current" id="modalPrice">$0.00</span>
+                        <span class="old" id="modalOldPrice">$0.00</span>
+                        <span class="discount" id="modalDiscount">-0%</span>
+                    </div>
+                    <p class="modal-description" id="modalDescription">Product description goes here.</p>
+                    <div class="modal-options">
+                        <div class="modal-size">
+                            <label>Size</label>
+                            <div class="size-options" id="modalSizes">
+                                <button>S</button><button>M</button><button>L</button><button>XL</button>
+                            </div>
+                        </div>
+                        <div class="modal-color">
+                            <label>Color</label>
+                            <div class="color-options" id="modalColors">
+                                <button style="background:#111;" data-color="#111"></button>
+                                <button style="background:#fff;" data-color="#fff"></button>
+                                <button style="background:#D4AF37;" data-color="#D4AF37"></button>
+                            </div>
+                        </div>
+                        <div class="modal-quantity">
+                            <label>Quantity</label>
+                            <div class="qty-selector">
+                                <button id="qtyMinus">-</button>
+                                <input type="number" id="qtyInput" value="1" min="1" max="10" />
+                                <button id="qtyPlus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-primary" id="modalAddToCart"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                        <button class="btn-outline" id="modalBuyNow">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal auth-modal glass">
+            <button class="modal-close" id="loginModalClose">&times;</button>
+            <div class="auth-content">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your SK account.</p>
+                <form id="loginForm">
+                    <div class="form-group"><input type="email" id="loginEmail" placeholder="Email address" required /></div>
+                    <div class="form-group"><input type="password" id="loginPassword" placeholder="Password" required /></div>
+                    <div class="form-options">
+                        <label><input type="checkbox" /> Remember me</label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Sign In</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="switchToRegister">Register</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal auth-modal glass">
+            <button class="modal-close" id="registerModalClose">&times;</button>
+            <div class="auth-content">
+                <h2>Create Account</h2>
+                <p>Join the SK community.</p>
+                <form id="registerForm">
+                    <div class="form-group"><input type="text" id="regFullName" placeholder="Full Name" required /></div>
+                    <div class="form-group"><input type="email" id="regEmail" placeholder="Email address" required /></div>
+                    <div class="form-group"><input type="tel" id="regPhone" placeholder="Phone number" /></div>
+                    <div class="form-group"><input type="password" id="regPassword" placeholder="Password" required /></div>
+                    <div class="form-group"><input type="password" id="regConfirmPassword" placeholder="Confirm Password" required /></div>
+                    <button type="submit" class="btn-primary full-width">Create Account</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="switchToLogin">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+  <!-- Profile Modal (with address display - centered) -->
+<div class="modal-overlay" id="profileModal">
+    <div class="modal profile-modal glass">
+        <button class="modal-close" id="profileModalClose">&times;</button>
+        <div class="profile-content">
+            <div class="profile-avatar" id="profileAvatar">
+                <img id="profileAvatarImg" src="" alt="Avatar" style="width:80px;height:80px;border-radius:50%;object-fit:cover;display:none;margin:0 auto;" />
+                <i class="fas fa-user-circle" id="profileAvatarIcon" style="font-size:5rem;color:var(--text-muted);display:block;margin:0 auto;"></i>
+                <div style="margin-top:8px;">
+                    <label for="avatarUpload" class="change-photo-btn">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </label>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;" />
+                </div>
+            </div>
+            <h3 id="profileName">User Name</h3>
+            <p id="profileEmail">user@email.com</p>
+            <p id="profilePhone">+1 234 567 890</p>
+            <p id="profileAddress" style="color:var(--text-muted);font-size:0.9rem;margin:2px 0 12px;">No address saved</p>
+            <div class="profile-actions">
+                <button class="btn-outline"><i class="fas fa-edit"></i> Change Name</button>
+                <button class="btn-outline"><i class="fas fa-box"></i> Order History</button>
+                <button class="btn-outline"><i class="fas fa-map-pin"></i> Saved Addresses</button>
+                <button class="btn-primary full-width" id="profileLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- ===== CART SLIDEOUT ===== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-slideout" id="cartSlideout">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty.</p><a href="#categories" class="btn-outline">Start Shopping</a></div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-summary">
+                <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+                <div class="cart-row"><span>Shipping</span><span id="cartShipping">$0.00</span></div>
+                <div class="cart-row total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+            </div>
+            <button class="btn-primary full-width" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ===== CHECKOUT SECTION ===== -->
+    <section class="section checkout-section" id="checkoutSection" style="display:none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Checkout</span>
+                <h2 class="section-title">Complete Your Order</h2>
+            </div>
+            <div class="checkout-grid">
+                <div class="checkout-form">
+                    <form id="checkoutForm">
+                        <div class="form-row">
+                            <div class="form-group"><label>Full Name</label><input type="text" id="checkoutName" placeholder="Full Name" required /></div>
+                            <div class="form-group"><label>Phone</label><input type="tel" id="checkoutPhone" placeholder="Phone Number" required /></div>
+                        </div>
+                        <div class="form-group"><label>Email</label><input type="email" id="checkoutEmail" placeholder="Email Address" required /></div>
+                        <div class="form-group"><label>Delivery Address</label><input type="text" id="checkoutAddress" placeholder="Street Address" required /></div>
+                        <div class="form-row">
+                            <div class="form-group"><label>City</label><input type="text" id="checkoutCity" placeholder="City" required /></div>
+                            <div class="form-group"><label>Postal Code</label><input type="text" id="checkoutPostal" placeholder="Postal Code" required /></div>
+                        </div>
+                        <div class="form-group"><label>Order Notes</label><textarea id="checkoutNotes" rows="2" placeholder="Special instructions..."></textarea></div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <div class="payment-options">
+                                <label><input type="radio" name="payment" value="cod" checked /> Cash on Delivery</label>
+                                <label><input type="radio" name="payment" value="card" /> Card</label>
+                                <label><input type="radio" name="payment" value="mobile" /> Mobile Banking</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="checkout-summary">
+                    <h4>Order Summary</h4>
+                    <div id="checkoutItems"></div>
+                    <div class="checkout-totals">
+                        <div class="checkout-row"><span>Subtotal</span><span id="checkoutSubtotal">$0.00</span></div>
+                        <div class="checkout-row"><span>Shipping</span><span id="checkoutShipping">$0.00</span></div>
+                        <div class="checkout-row total"><span>Total</span><span id="checkoutTotal">$0.00</span></div>
+                    </div>
+                    <button class="btn-primary full-width" id="confirmOrderBtn">Confirm Order</button>
+                    <button class="btn-outline full-width" id="backToCartBtn">Back to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <div class="admin-panel" id="adminPanel" style="display:none;">
+        <aside class="admin-sidebar">
+            <div class="admin-brand">SK Admin</div>
+            <nav class="admin-nav">
+                <a href="#" class="active" data-admin="dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" data-admin="orders"><i class="fas fa-box"></i> Orders</a>
+                <a href="#" data-admin="products"><i class="fas fa-tag"></i> Products</a>
+                <a href="#" data-admin="categories"><i class="fas fa-th-large"></i> Categories</a>
+                <a href="#" data-admin="customers"><i class="fas fa-users"></i> Customers</a>
+                <a href="#" data-admin="reports"><i class="fas fa-chart-bar"></i> Reports</a>
+                <a href="#" data-admin="settings"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#" data-admin="logout" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <div class="admin-page" id="adminDashboard">
+                <h2>Dashboard</h2>
+                <div class="admin-stats">
+                    <div class="stat-card"><h4>Today's Sales</h4><span>$0</span></div>
+                    <div class="stat-card"><h4>Monthly Sales</h4><span>$0</span></div>
+                    <div class="stat-card"><h4>Total Revenue</h4><span>$0</span></div>
+                    <div class="stat-card"><h4>Total Profit</h4><span>$0</span></div>
+                    <div class="stat-card"><h4>Orders Today</h4><span>0</span></div>
+                    <div class="stat-card"><h4>Pending Orders</h4><span>0</span></div>
+                    <div class="stat-card"><h4>Delivered Orders</h4><span>0</span></div>
+                    <div class="stat-card"><h4>Total Customers</h4><span>0</span></div>
+                </div>
+            </div>
+            <div class="admin-page" id="adminOrders" style="display:none;">
+                <h2>Order Management</h2>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead><tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Email</th><th>Products</th><th>Qty</th><th>Total</th><th>Profit</th><th>Address</th><th>Date</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="adminOrdersBody"><tr><td colspan="13" class="text-center">No orders yet.</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="admin-page" id="adminProducts" style="display:none;">
+                <h2>Product Management</h2>
+                <button class="btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead><tr><th>Image</th><th>Name</th><th>Price</th><th>Stock</th><th>Discount</th><th>Category</th><th>Actions</th></tr></thead>
+                        <tbody id="adminProductsBody"><tr><td colspan="7" class="text-center">No products yet.</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="admin-page" id="adminCategories" style="display:none;"><h2>Categories</h2><p>Category management will be available here.</p></div>
+            <div class="admin-page" id="adminCustomers" style="display:none;"><h2>Customers</h2><p>Customer management will be available here.</p></div>
+            <div class="admin-page" id="adminReports" style="display:none;"><h2>Reports</h2><p>Charts and analytics will be displayed here.</p></div>
+            <div class="admin-page" id="adminSettings" style="display:none;"><h2>Settings</h2><p>Store settings will be available here.</p></div>
+        </main>
+    </div>
+
+    <script src="style and animation/script.js"></script>
+</body>
+</html>
